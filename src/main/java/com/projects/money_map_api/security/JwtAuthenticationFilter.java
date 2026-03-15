@@ -3,6 +3,8 @@ package com.projects.money_map_api.security;
 import com.projects.money_map_api.entity.User;
 import com.projects.money_map_api.exception.MoneyMapException;
 import com.projects.money_map_api.repository.UserRepository;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -14,23 +16,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@RequiredArgsConstructor
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
-
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserRepository userRepository) {
-        this.jwtUtil = jwtUtil;
-        this.userRepository = userRepository;
-    }
+    private final Whitelist whitelist;
 
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException {
+            @NonNull  HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         try {
             String authHeader = request.getHeader("Authorization");
@@ -53,11 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        String path = request.getRequestURI();
-
-        return path.startsWith("/api/auth/") ||      // Public auth endpoints
-                path.equals("/health") ||             // Health check
-                path.equals("/");                     // Root path
+    protected boolean shouldNotFilter(@NonNull HttpServletRequest request) throws ServletException {
+        return whitelist.isPublicPath(request);
     }
 }
