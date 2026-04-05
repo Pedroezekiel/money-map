@@ -23,6 +23,8 @@ public class Account {
 
     private String accountName;
 
+    private String category;
+
     private BigDecimal savingBalance;
 
     private BigDecimal spendingBalance;
