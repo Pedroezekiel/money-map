@@ -140,7 +140,7 @@ public class AuthService {
 
         if (!userRepository.existsByEmail(request.getEmail())) {
             log.warn("Registration attempt with existing email: {}", request.getEmail());
-            return "If an account exists with this email, you will receive a password reset link";
+            return SuccessMessage.PASSWORD_RESET_LINK_SENT;
         }
 
         // Future: Generate reset token and send email
@@ -148,7 +148,7 @@ public class AuthService {
 
         log.info("Forgot password request processed for email: {}", request.getEmail());
 
-        return "If an account exists with this email, you will receive a password reset link";
+        return SuccessMessage.PASSWORD_RESET_LINK_SENT;
     }
 
 
