@@ -26,4 +26,5 @@ public class User {
     private LocalDateTime dateUpdated;
     private String password;
     private String profileImageUrl;
+    private boolean active;
 }
