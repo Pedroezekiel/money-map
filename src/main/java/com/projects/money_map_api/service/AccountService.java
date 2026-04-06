@@ -27,11 +27,18 @@ public class AccountService {
         if(!user.isActive()){
             throw new AccountException(ErrorMessage.USER_IS_INACTIVE);
         }
-        String prompt = "Categorize this: " + accountRequest.getName()
-                + accountRequest.getDescription() +
-                ". Choose from: Food, Transport, Utilities, " +
-                "Entertainment, Healthcare, Shopping, Other. " +
-                "Reply with ONLY the category.";
+        String description = (accountRequest.getDescription() != null)
+                ? accountRequest.getDescription()
+                : "No description provided";
+
+        String prompt = String.format(
+                "Analyze this transaction: Name: '%s', Info: '%s'. " +
+                        "Select the best category from [Food, Transport, Utilities, Entertainment, Healthcare, Shopping]. " +
+                        "If it doesn't fit, provide a specific one-word category (e.g., 'Family', 'Education'). " +
+                        "Reply with ONLY the one-word category.",
+                accountRequest.getName(),
+                description
+        );
 
         String category = model.chat(prompt);
 
@@ -43,7 +50,7 @@ public class AccountService {
 
         Account savedAccount = accountRepository.save(account);
         return AccountResponse.builder().id(savedAccount.getId())
-                .name(savedAccount.getAccountName()).savingBalance(savedAccount.getSavingBalance())
+                .name(savedAccount.getAccountName()).category(savedAccount.getCategory()).savingBalance(savedAccount.getSavingBalance())
                 .spendingBalance(savedAccount.getSpendingBalance()).currency(savedAccount.getCurrency())
                 .build();
     }
