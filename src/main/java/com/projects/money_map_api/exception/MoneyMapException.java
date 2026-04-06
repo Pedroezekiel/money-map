@@ -1,5 +1,6 @@
 package com.projects.money_map_api.exception;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -14,8 +15,15 @@ import org.springframework.http.HttpStatus;
  *   throw new MoneyMapException("Token expired", HttpStatus.UNAUTHORIZED);
  *   throw new MoneyMapException("Invalid input");  // defaults to 400
  */
+@Getter
 public class MoneyMapException extends RuntimeException {
 
+    /**
+     * -- GETTER --
+     *  GET STATUS CODE
+     *
+     * @return The HTTP status code
+     */
     private final HttpStatus statusCode;
 
     /**
@@ -52,12 +60,4 @@ public class MoneyMapException extends RuntimeException {
         this.statusCode = statusCode;
     }
 
-    /**
-     * GET STATUS CODE
-     *
-     * @return The HTTP status code
-     */
-    public HttpStatus getStatusCode() {
-        return statusCode;
-    }
 }
