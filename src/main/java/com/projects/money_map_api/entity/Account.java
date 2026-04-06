@@ -25,6 +25,8 @@ public class Account {
 
     private String category;
 
+    private String description;
+
     private BigDecimal savingBalance;
 
     private BigDecimal spendingBalance;
