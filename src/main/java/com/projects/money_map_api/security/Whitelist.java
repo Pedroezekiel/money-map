@@ -26,16 +26,16 @@ public class Whitelist {
      * Paths that don't require JWT authentication
      */
     public static final List<String> PUBLIC_PATHS = Arrays.asList(
-            "/api/auth/login",
-            "/api/auth/register",
-            "/api/auth/verify",
-            "/api/auth/refresh",
+            "/api/v1/auth/login",
+            "/api/v1/auth/register",
+            "/api/v1/auth/verify",
+            "/api/v1/auth/refresh",
             "/health",
             "/health/live",
             "/health/ready",
-            "/",
-            "/swagger-ui.html",
-            "/swagger-ui/",
+            "/v3/api-docs/swagger-config",
+            "/swagger-ui.html/",
+            "/swagger-ui/**",
             "/v3/api-docs/",
             "/actuator",
             "/actuator/",
@@ -43,12 +43,16 @@ public class Whitelist {
             "/swagger-ui/swagger-ui.css",
             "/swagger-ui/swagger-ui-bundle.js",
             "/swagger-ui/swagger-ui-standalone-preset.js",
-            "/swagger-ui/index.html",
+            "/swagger-ui/index.html/**",
             "/v3/api-docs",
             "/swagger-resources",
             "/swagger-resources/configuration/ui",
             "/swagger-resources/configuration/security",
-            "/webjars/swagger-ui"
+            "/webjars/swagger-ui/",
+            "/api/v1/test/ai/**",
+            "/api/v1/auth/",
+            "/swagger-ui/",      // This covers /swagger-ui/index.html, css, js, etc.
+            "/webjars"       // CRITICAL: Swagger UI stores its static assets here
     );
 
     /**
@@ -56,7 +60,7 @@ public class Whitelist {
      * Any path starting with these doesn't require authentication
      */
     public static final List<String> PUBLIC_PREFIXES = Arrays.asList(
-            "/api/auth/",
+            "/api/v1/auth/",
             "/health",
             "/swagger-ui",
             "/v3/api-docs",
