@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 public class AccountResponse {
     private String id;
     private String name;
+    private String category;
     private String currency;
     private BigDecimal savingBalance;
     private BigDecimal spendingBalance;
