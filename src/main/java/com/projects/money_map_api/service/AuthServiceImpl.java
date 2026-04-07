@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 @Slf4j
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -30,6 +30,7 @@ public class AuthService {
 
 
     @Transactional
+    @Override
     public AuthResponse register(RegisterRequest request) {
         log.info("Registering new user with email: {}", request.getEmail());
 
@@ -70,6 +71,7 @@ public class AuthService {
     }
 
     @Transactional
+    @Override
     public AuthResponse login(LoginRequest request) {
         log.info("Login attempt for email: {}", request.getEmail());
 
@@ -101,6 +103,7 @@ public class AuthService {
     }
 
     @Transactional
+    @Override
     public String resetPassword(User user, ResetPasswordRequest request) {
         log.info("Reset password attempt for user: {}", user.getEmail());
 
@@ -135,6 +138,7 @@ public class AuthService {
 
 
     @Transactional
+    @Override
     public String forgotPassword(ForgotPasswordRequest request) {
         log.info("Forgot password request for email: {}", request.getEmail());
 
