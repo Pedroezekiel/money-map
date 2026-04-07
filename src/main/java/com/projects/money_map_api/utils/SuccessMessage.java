@@ -9,4 +9,5 @@ public class SuccessMessage {
     public static final String PASSWORD_RESET_SUCCESS = "Password reset successfully";
 
     public static final String PASSWORD_RESET_LINK_SENT = "If an account exists with this email, you will receive a password reset link";
+    public static final String ACCOUNT_DELETED_SUCCESSFULLY = "Account deleted successfully";
 }
