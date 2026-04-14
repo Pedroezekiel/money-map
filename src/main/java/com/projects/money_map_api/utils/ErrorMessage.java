@@ -18,4 +18,5 @@ public class ErrorMessage {
 
     public static final String ACCOUNT_NOT_FOUND = "Account not found, or you are not the owner of this account.";
     public static final String ACCOUNT_ID_REQUIRED = "Account ID is required.";
+    public static final String TRANSACTION_NOT_FOUND = "Transaction not found, or you are not the owner of this transaction.";
 }
