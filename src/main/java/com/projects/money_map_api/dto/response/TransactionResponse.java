@@ -1,6 +1,7 @@
 package com.projects.money_map_api.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.projects.money_map_api.entity.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +14,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountResponse {
+public class TransactionResponse {
     private String id;
-    private String name;
+    private String userId;
+    private BigDecimal amount;
+    private TransactionType  type;
     private String description;
     private String category;
-    private String currency;
-    private BigDecimal savingBalance;
-    private BigDecimal spendingBalance;
-    private String userName;
+
+
 }

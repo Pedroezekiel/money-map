@@ -3,6 +3,7 @@ package com.projects.money_map_api.entity;
 import com.projects.money_map_api.entity.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "transactions")
+@Builder
 public class Transaction {
 
     @Id
@@ -26,8 +28,6 @@ public class Transaction {
 
     private String description;
 
-    private LocalDateTime transactionDate;
-
     private LocalDateTime dateCreated;
 
     private LocalDateTime dateUpdated;
@@ -35,6 +35,10 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
 
     private String category;
 }
